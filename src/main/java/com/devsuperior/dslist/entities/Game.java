@@ -26,7 +26,11 @@ public class Game {
     private String platforms;
     private Double score;
     private String imgUrl;
+    // Nas linhas abaixo está sendo utilizado o columnDefinition para definir o tipo do campo no banco de dados
+    // Porque o padrão de uma String é varchar que só vai até 255 caracteres, já o TEXT aceita textos maiores
+    @Column(columnDefinition = "TEXT")
     private String shortDescription;
+    @Column(columnDefinition = "TEXT")
     private String longDescription;
 
     public Game(){
