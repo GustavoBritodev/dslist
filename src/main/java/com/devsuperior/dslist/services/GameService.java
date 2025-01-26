@@ -1,10 +1,12 @@
 package com.devsuperior.dslist.services;
 
+import com.devsuperior.dslist.dto.GameDTO;
 import com.devsuperior.dslist.dto.GameMinDTO;
 import com.devsuperior.dslist.entities.Game;
 import com.devsuperior.dslist.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,6 +24,18 @@ public class GameService {
     @Autowired
     private GameRepository gameRepository;
 
+    // A notation @Transactional é uma boa prática para _todo metodo do service
+    // para que ele garanta que a operação com o banco de dados vai acontecer
+    // obedecendo os princípios das transações ACID (Atômica, consistente, isolada e durável)
+    //Lembrar de usar o @Transactional do spring e não do jakarta
+   @Transactional(readOnly = true)
+    public GameDTO findById(Long gameId){
+        // O metodo do repository findById recebe um id e retorna um objeto
+        Game result = gameRepository.findById(gameId).get();
+        return new GameDTO(result);
+    }
+
+    @Transactional(readOnly = true)
     public List<GameMinDTO> findAllGames(){
         List<Game> result = gameRepository.findAll();
         //Stream é uma lib do java que permite fazer operações com sequência de dados, como, por exemplo, o map
