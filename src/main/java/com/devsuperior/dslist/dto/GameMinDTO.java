@@ -26,7 +26,7 @@ public class GameMinDTO {
         //Nesse caso o this nao se faz necessário já que não há ambiguidade
         id = projection.getId();
         title = projection.getTitle();
-        year = projection.getYear();
+        year = projection.getGameYear();
         imgUrl = projection.getImgUrl();
         shortDescription = projection.getShortDescription();
     }
